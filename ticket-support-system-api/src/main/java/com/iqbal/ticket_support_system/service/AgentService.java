@@ -7,6 +7,7 @@ import com.iqbal.ticket_support_system.repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,18 +39,18 @@ public class AgentService {
         return convertToDTO(agent);
     }
 
+    // service/AgentService.java
     private AgentDTO convertToDTO(Agent agent) {
         AgentDTO dto = new AgentDTO();
         dto.setId(agent.getId());
         dto.setName(agent.getName());
         dto.setEmail(agent.getEmail());
         dto.setSpecialty(agent.getSpecialty());
-        // Handle null assignedTickets
-        List<Long> ticketIds = agent.getAssignedTickets() != null ?
-                agent.getAssignedTickets().stream()
-                        .map(Ticket::getId)
-                        .collect(Collectors.toList()) :
-                Collections.emptyList();
+        List<Long> ticketIds = agent.getAssignedTickets() != null
+                ? agent.getAssignedTickets().stream()
+                .map(Ticket::getId)
+                .collect(Collectors.toList())
+                : new ArrayList<>();
         dto.setAssignedTicketIds(ticketIds);
         return dto;
     }
