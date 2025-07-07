@@ -1,0 +1,15 @@
+<mat-card *ngIf="agent">
+  <mat-card-header>
+    <mat-card-title>Agent: {{ agent.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Email:</strong> {{ agent.email }}</p>
+    <p><strong>Specialty:</strong> {{ agent.specialty || 'N/A' }}</p>
+    <h3>Assigned Tickets</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let ticket of tickets">
+        <p>Ticket #{{ ticket.id }}: {{ ticket.title }} ({{ ticket.status }})</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

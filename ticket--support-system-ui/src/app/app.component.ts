@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ticket--support-system-ui';
+  // title = 'ticket--support-system-ui';
+    title = 'Ticket Support System';
 }
+

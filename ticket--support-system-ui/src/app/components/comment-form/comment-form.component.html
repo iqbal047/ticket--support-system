@@ -1,0 +1,13 @@
+<form [formGroup]="commentForm" (ngSubmit)="addComment()">
+  <mat-form-field>
+    <mat-label>Author</mat-label>
+    <input matInput formControlName="author">
+    <mat-error *ngIf="commentForm.get('author')?.hasError('required')">Author is required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Comment</mat-label>
+    <textarea matInput formControlName="message"></textarea>
+    <mat-error *ngIf="commentForm.get('message')?.hasError('required')">Comment is required</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">Add Comment</button>
+</form>

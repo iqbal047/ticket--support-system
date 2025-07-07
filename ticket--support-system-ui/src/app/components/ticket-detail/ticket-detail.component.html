@@ -1,0 +1,30 @@
+<mat-card *ngIf="ticket">
+  <mat-card-header>
+    <mat-card-title>Ticket #{{ ticket.id }}: {{ ticket.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Description:</strong> {{ ticket.description }}</p>
+    <p><strong>Status:</strong> {{ ticket.status }}</p>
+    <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+    <p><strong>Created Date:</strong> {{ ticket.createdDate | date }}</p>
+    <p><strong>Assigned Agent:</strong> {{ ticket.assignedAgentId ? 'Agent #' + ticket.assignedAgentId : 'Unassigned' }}</p>
+    <mat-form-field>
+      <mat-label>Assign Agent</mat-label>
+      <mat-select (selectionChange)="assignAgent($event.value)">
+        <mat-option [value]="null">Unassign</mat-option>
+        <mat-option *ngFor="let agent of agents" [value]="agent.id">
+          {{ agent.name }} ({{ agent.email }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <h3>Comments</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let comment of comments">
+        <p><strong>{{ comment.author }}</strong> ({{ comment.createdDate | date }}): {{ comment.message }}</p>
+      </mat-list-item>
+    </mat-list>
+    <!-- <app-comment-form [ticketId]="ticket.id" (commentAdded)="loadComments(ticket.id!)"></app-comment-form> -->
+     <app-comment-form [ticketId]="ticket.id!" (commentAdded)="loadComments(ticket.id!)"></app-comment-form>
+
+  </mat-card-content>
+</mat-card>
